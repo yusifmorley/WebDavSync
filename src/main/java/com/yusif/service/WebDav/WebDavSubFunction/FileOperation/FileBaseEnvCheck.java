@@ -36,19 +36,18 @@ public class FileBaseEnvCheck implements WebDavSubFunctionBaseEnvInit {
         };
         dicCheck.check(dirs);  //目录是否存在
 
-        //排序文件检测
-        Path path = Paths.get(fileOperationConfig.getTargetMp4());
-        Path path2 = Paths.get(fileOperationConfig.getTargetPic());
-
+//        //排序文件检测
+//        Path path = Paths.get(fileOperationConfig.getTargetMp4());
+//        Path path2 = Paths.get(fileOperationConfig.getTargetPic());
 //        if (!fileObserverConfig.isBoolsort()) {
 //            log.info("mermory文件排序已经关闭");
 //        } else
-        if (checkdic(path) && checkdic(path2)) {
-            fileSort.sortfile();
-            log.info(ActionLog.FileOrderOk.getMsg());
-        } else {
-            log.info(ActionLog.FileHavedExist.getMsg());
-        }
+//        if (checkdic(path) && checkdic(path2)) {
+////            fileSort.sortfile();
+//            log.info(ActionLog.FileOrderOk.getMsg());
+//        } else {
+//            log.info(ActionLog.FileHavedExist.getMsg());
+//        }
     }
 
     public boolean checkdic(Path path) throws IOException {

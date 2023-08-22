@@ -2,8 +2,9 @@ package com.yusif.service.WebDav.WebDavSubFunction.FileOperation.FileService;
 
 import com.yusif.MyWarraper.IntegerWapper;
 
+import com.yusif.Tool.MyDateTime;
 import com.yusif.config.FileOperationConfig;
-import com.yusif.utils.MyDateTime;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.nio.file.Path;
 import java.util.stream.LongStream;
 @Slf4j
 @Component
-//插入文件
+//插入 文件和维持
 public class InsertAndCons {
 
     FileInsert fileInsert;
@@ -72,8 +73,11 @@ public class InsertAndCons {
             current=currentpic;
             count=countpic;
         }
+        if (Files.notExists(current.resolve(file.getName())))
         //复制文件
-        Files.copy(file.toPath(), current.resolve(file.getName()));
+           Files.copy(file.toPath(), current.resolve(file.getName()));
+        else
+            return;
         log.info("移动文件成功！");
         count.increment(1);
         if (count.getI() > 100) {
@@ -93,25 +97,35 @@ public class InsertAndCons {
 //
             String newstring = current.getFileName().toString().replace("--", "至 " + timeFromMIll);
             //目录改名
-            Path move = Files.move(current, current.resolveSibling(newstring));
-            if (Files.exists(move)) {
-                log.info("修改目录名成功！");
-            } else {
-                log.warn("修改目录名失败！");
-            }
-            //创建 --文件夹
-            Path directory = Files.createDirectory(current.resolveSibling(timeFromMIll + " --"));
-            if (Files.exists(directory)) {
-                log.info("创建文件夹成功!");
-            } else {
-                log.warn("创建文件夹失败!");
-            }
-            if (flag==0){
-                currentmp4=directory;
-                countmp4=getCountmp4();
+            if (Files.notExists(current.resolveSibling(newstring))) {
+                Path move = Files.copy(current, current.resolveSibling(newstring));
+                if (Files.exists(move)) {
+                    log.info("修改目录名成功！");
+                } else {
+                    log.warn("修改目录名失败！");
+                }
             }else {
-                currentpic=directory;
-                countpic=getCountpic();
+                return;
+            }
+
+            //创建 --文件夹
+            if (Files.notExists(current.resolveSibling(timeFromMIll + " --"))){
+                Path directory = Files.createDirectory(current.resolveSibling(timeFromMIll + " --"));
+                if (Files.exists(directory)) {
+                    log.info("创建文件夹成功!");
+                } else {
+                    log.warn("创建文件夹失败!");
+                }
+                if (flag==0){
+                    currentmp4=directory;
+                    countmp4=getCountmp4();
+                }else {
+                    currentpic=directory;
+                    countpic=getCountpic();
+                }
+
+            }else {
+                return;
             }
         }
     }

@@ -1,17 +1,16 @@
-#webdav 实现配置
-webdav:
-  folder: res #父路径
-  path: webdav #静态资源路径 也是 webdav url路径
-  username: root
-  password: root
+server:
+  port: 8080
+  address: 192.168.124.6
+
+webdav-trigger: true
 
 # webdav检测配置
 file-observer:
   boolSort: false  #是否对memory启动 结构化排序
 
-  interval: 36000000 #文件夹扫描变动 10小时= 36000000 间隔 此配置也适用于mynote
+  interval: 5000 #文件夹扫描变动 10小时= 36000000 间隔 此配置也适用于mynote
 
-  consumeTime: 3600000  # 消费间隔 处理队列里消息
+  consumeTime: 5000  # 消费间隔 处理队列里消息
 
   targetPic: res/webdav/orderstructfile/pic
 
@@ -19,11 +18,11 @@ file-observer:
 
   hnotesPath: res/webdav/hnote-data-v2/notes
 
-  hnoteDatePath: res/webdav/hnote-data-v2/meta.json
+  hnoteDateMetaPath: res/webdav/hnote-data-v2/meta.json
 
   obPicAndMp4:  #监听资源的目录
     - res/webdav/img/ #来自PhotoSync
-    - res/photo/      #来自Telegram
+    - res/memory
 
   taoPath: res/Tao/Tao-and-Teh-zh-cn.md
 
@@ -37,37 +36,14 @@ table:
 logging:
   file:
     path: res/log
-  level:
-    io.milton: error
-
 
 mybatis-plus:
   config-location: classpath:/Mybatis/mybatis-config.xml
   mapper-locations:
-    - classpath:/Mybatis/mapper/IpMapper.xml
     - classpath:/Mybatis/mapper/MyNoteMapper.xml
   global-config:
     db-config:
       update-strategy: not_empty
-
-my-bot:
-  telegramId: 507467074
-
-  botToken: 6319256051:AAGfFawdcExLn3WSszJUR7UNs-qIklL5hYI
-
-  botUserName: Theme123
-
-  videoPath: res/video/allvideo.txt
-
-
-MyApiKey: 15a9bad830a12942c9b64572fce52c85
-
-
-braces:
-  startime: 2022年-09月-03日 12:00:00
-  offset: -18
-
-
 
 spring:
   task:
@@ -75,18 +51,8 @@ spring:
       pool:
         size: 1   #定时任务线程池大小
 
-  web:
-    resources:
-      static-locations:
-        - file:res/web/nativeipinfo/android
-        - file:res/web/nativeipinfo/desktop
-        - file:res/public
-        - file:res/photo
-        - file:res/web/mybackstage
-        - file:res/lisen/1
-
-  profiles:
-    active: prod
-  mvc:
-   path match:
-     matching-strategy: ant_path_matcher
+  datasource: #数据源配置
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/mydata?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver #mysql的驱动

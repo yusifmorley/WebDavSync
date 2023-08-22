@@ -3,7 +3,7 @@ package com.yusif.service.WebDav.WebDavSubFunction.MyNote;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.yusif.service.WebDav.WebDavSubFunction.MyNote.NoteService.MyNoteFunctions.impl.BeeNoteService;
 import com.yusif.service.WebDav.WebDavSubFunction.ThreadProcessService;
-import com.yusif.Dao.MyNoteMapper;
+import com.yusif.dao.MyNoteMapper;
 import com.yusif.Entity.note.BeeNote;
 import com.yusif.Entity.note.MyNote;
 import com.yusif.Entity.note.UpDateNote;

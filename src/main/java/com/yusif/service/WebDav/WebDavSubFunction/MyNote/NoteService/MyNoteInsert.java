@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yusif.service.WebDav.WebDavSubFunction.MyNote.NoteService.MyNoteFunctions.NoteService;
 import com.yusif.service.WebDav.WebDavSubFunction.MyNote.NoteService.MyNoteFunctions.impl.BeeNoteService;
 import com.yusif.service.WebDav.WebDavSubFunction.MyNote.NoteService.MyNoteFunctions.impl.GoogleNoteService;
-import com.yusif.Dao.MyNoteMapper;
+import com.yusif.dao.MyNoteMapper;
 import com.yusif.Entity.note.MyNote;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

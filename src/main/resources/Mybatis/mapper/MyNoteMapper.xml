@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yusif.Dao.MyNoteMapper">
+<mapper namespace="com.yusif.dao.MyNoteMapper">
     <select id="gettables" resultType="java.lang.String">
         show tables
     </select>

@@ -1,11 +1,12 @@
 package com.yusif.service.WebDav.WebDavSubFunction.MyNote;
 
-import com.yusif.Dao.MyNoteMapper;
+import com.yusif.dao.MyNoteMapper;
 
 import com.yusif.Entity.note.UpDateNote;
 import com.yusif.config.FileOperationConfig;
 import com.yusif.config.SingleBean;
 import com.yusif.service.WebDav.WebDavSubFunction.WebDavSubFunctionMonitor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 import org.apache.commons.io.monitor.FileAlterationMonitor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.io.File;
 import java.util.concurrent.LinkedBlockingQueue;
-
+@Slf4j
 @Component
 public class MyNoteMonitor implements WebDavSubFunctionMonitor {
 
@@ -41,6 +42,7 @@ public class MyNoteMonitor implements WebDavSubFunctionMonitor {
                 upDateNote.setFile(file);
                 upDateNote.setFlag(true);
                 linkedBlockingQueue.add(upDateNote);
+                log.info("有note创建");
             }
 
             @Override
@@ -49,7 +51,9 @@ public class MyNoteMonitor implements WebDavSubFunctionMonitor {
                 UpDateNote upDateNote = new UpDateNote();
                 upDateNote.setFile(file);
                 upDateNote.setFlag(false);
+
                 linkedBlockingQueue.add(upDateNote);
+                log.info("note 改变了");
             }
         });
         monitor.addObserver(fileAlterationObserver);
@@ -57,7 +61,9 @@ public class MyNoteMonitor implements WebDavSubFunctionMonitor {
 
     @Override
     public void monitorStart() throws Exception {
+
         monitor.start();
+        log.info("为note创建监听成功");
     }
 
     @Override

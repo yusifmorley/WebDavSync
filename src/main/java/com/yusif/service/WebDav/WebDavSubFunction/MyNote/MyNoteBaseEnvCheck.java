@@ -1,8 +1,7 @@
 package com.yusif.service.WebDav.WebDavSubFunction.MyNote;
 
-import com.yusif.Dao.IpMapper;
-import com.yusif.Dao.MyNoteMapper;
 import com.yusif.config.TableConfig;
+import com.yusif.dao.MyNoteMapper;
 import com.yusif.service.WebDav.WebDavSubFunction.MyNote.NoteService.MyNoteInsert;
 import com.yusif.service.WebDav.WebDavSubFunction.WebDavSubFunctionBaseEnvInit;
 import com.yusif.Tool.DicCheck;
@@ -15,8 +14,6 @@ import java.util.List;
 @Component
 @Slf4j
 public class MyNoteBaseEnvCheck implements WebDavSubFunctionBaseEnvInit {
-    @Autowired
-    IpMapper ipMapper;
     @Autowired
     MyNoteMapper myNoteMapper;
     @Autowired
@@ -42,8 +39,7 @@ public class MyNoteBaseEnvCheck implements WebDavSubFunctionBaseEnvInit {
         if (!b){
             log.info("正在创建表");
             int c1 = myNoteMapper.createtables();
-            int c2 = ipMapper.createtables();
-            if (c1==1&&c2==1){
+            if (c1==1){
                 log.info("创建表成功！");
             }
             log.info("正在初始化note...");
