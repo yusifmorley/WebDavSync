@@ -75,12 +75,12 @@ public class InsertAndCons {
         }
         if (Files.notExists(current.resolve(file.getName())))
         //复制文件
-           Files.copy(file.toPath(), current.resolve(file.getName()));
+           Files.move(file.toPath(), current.resolve(file.getName()));
         else
             return;
         log.info("移动文件成功！");
         count.increment(1);
-        if (count.getI() > 100) {
+        if (count.getI() > 200) {
             //我们默认 文件 永远存在 -- 文件夹
             //而且永远只存在一个
             //也就是永远只能向后延伸
@@ -94,11 +94,14 @@ public class InsertAndCons {
             LongStream build = builder.build();
             long asLong = build.max().getAsLong();//寻找出目录中的最大文件的时间
             String timeFromMIll = myDate.getTimeFromMIll(asLong);
-//
+            //新目录名
             String newstring = current.getFileName().toString().replace("--", "至 " + timeFromMIll);
             //目录改名
-            if (Files.notExists(current.resolveSibling(newstring))) {
-                Path move = Files.copy(current, current.resolveSibling(newstring));
+            Path newPath=current.resolveSibling("compress").resolve(newstring);
+            if (Files.notExists(newPath)) {
+
+                Path move = Files.move(current,newPath);
+
                 if (Files.exists(move)) {
                     log.info("修改目录名成功！");
                 } else {

@@ -45,7 +45,7 @@ public class MyNoteSync {
        aft=beeNoteService.toMyNote();
        //比较
        List<MyNote> myNotes = ListUtils.removeAll(aft, pre);
-       if (myNotes.size()!=0){
+       if (!myNotes.isEmpty()){
            for (MyNote my:myNotes
                 ) {
                myNoteMapper.insert(my);

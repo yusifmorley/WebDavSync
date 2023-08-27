@@ -37,10 +37,6 @@ public class FileBaseEnvCheck implements WebDavSubFunctionBaseEnvInit {
     public void baseEnvInit() throws Exception {
 
         List<String> obPicAndMp4 = fileOperationConfig.getObPicAndMp4();
-
-        obPicAndMp4.add(fileOperationConfig.getTargetMp4());
-        obPicAndMp4.add(fileOperationConfig.getTargetPic());
-
         dicCheck.check(obPicAndMp4);  //目录是否存在 不存在则 创建
 
         if (Objects.nonNull(fileInsert.getCurrentFile(fileOperationConfig.getTargetMp4()))

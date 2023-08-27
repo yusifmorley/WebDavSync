@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@ConditionalOnProperty(value = "webdav-trigger",havingValue = "true")
 @Component
 @Slf4j
 public class SchedulingConfig {
