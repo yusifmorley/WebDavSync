@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 @Slf4j
-@ConditionalOnProperty(value = "webdav-trigger",havingValue = "true")
 @Component
 public class Trigger  implements ApplicationContextAware {
     @Override

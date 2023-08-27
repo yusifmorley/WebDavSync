@@ -2,8 +2,6 @@ server:
   port: 8080
   address: 192.168.124.6
 
-webdav-trigger: true
-
 # webdav检测配置
 file-observer:
   boolSort: false  #是否对memory启动 结构化排序
@@ -30,7 +28,6 @@ file-observer:
 
 table:
   alltable:
-    - iplogo
     - mynote
 
 logging:
@@ -56,3 +53,6 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/mydata?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver #mysql的驱动
+sync:   # 滞后文件 同步
+  file: false
+  note: false

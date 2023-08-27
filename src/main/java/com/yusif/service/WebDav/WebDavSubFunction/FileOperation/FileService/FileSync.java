@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -21,7 +22,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 //对 滞后文件进行同步
 @Slf4j
 @Component
+@ConditionalOnProperty(value = "sync.file", havingValue = "true")
 public class FileSync {
+   // 目标文件夹 和源文件夹比较 把相差的文件 作为新文件的生产 进行消费
    LinkedBlockingQueue<FileUpdate> linkedBlockingQueue = SingleBean.getBlockingFileQueue();
    private  String tartDic="res/webdav/orderstructfile";
    private   List<MyFileInfo> aftpic;
@@ -69,7 +72,6 @@ public class FileSync {
       pathPic.forEach(e->{
          linkedBlockingQueue.add(new FileUpdate(Type.Pic,e.getFile()));
       });
-      System.out.println("");
    }
 
 }

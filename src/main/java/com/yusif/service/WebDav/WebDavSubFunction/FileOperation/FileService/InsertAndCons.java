@@ -58,7 +58,7 @@ public class InsertAndCons {
             log.info("存在可操作文件 包含 -- ");
         }
         else {
-            throw new  RuntimeException("找不到可操作文件！");
+            throw new  RuntimeException("找不到可操作文件 没有目录包含 --！");
         }
 
         Path current;
@@ -92,7 +92,7 @@ public class InsertAndCons {
                 builder.add(p.toFile().lastModified());
             }
             LongStream build = builder.build();
-            long asLong = build.max().getAsLong();//寻找出目录最大文件的时间
+            long asLong = build.max().getAsLong();//寻找出目录中的最大文件的时间
             String timeFromMIll = myDate.getTimeFromMIll(asLong);
 //
             String newstring = current.getFileName().toString().replace("--", "至 " + timeFromMIll);
@@ -108,13 +108,13 @@ public class InsertAndCons {
                 return;
             }
 
-            //创建 --文件夹
+            //创建 -- 文件夹
             if (Files.notExists(current.resolveSibling(timeFromMIll + " --"))){
                 Path directory = Files.createDirectory(current.resolveSibling(timeFromMIll + " --"));
                 if (Files.exists(directory)) {
                     log.info("创建文件夹成功!");
                 } else {
-                    log.warn("创建文件夹失败!");
+                    throw new  RuntimeException("创建 -- 文件夹失败!");
                 }
                 if (flag==0){
                     currentmp4=directory;

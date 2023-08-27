@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+
 @Component
 @Slf4j
 public class DicCheck {
@@ -18,7 +20,7 @@ public class DicCheck {
     @Autowired
     FileOperationConfig fileOperationConfig;
 
-    public void check( String[] dirs) throws Exception {
+    public void check( List<String> dirs) throws Exception {
         //文件夹检测
         for (String s:dirs
         ) {
