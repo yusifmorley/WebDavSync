@@ -108,7 +108,7 @@ public class InsertAndCons {
                     log.warn("修改目录名失败！");
                 }
             }else {
-                return;
+                throw new RuntimeException("已存在一模一样的文件夹，请调整文件夹容量上限");
             }
 
             //创建 -- 文件夹
