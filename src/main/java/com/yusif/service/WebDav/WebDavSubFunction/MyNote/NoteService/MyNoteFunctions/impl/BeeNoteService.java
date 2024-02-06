@@ -14,10 +14,8 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 @Component
 public class BeeNoteService implements NoteService {
 
@@ -37,12 +35,15 @@ public class BeeNoteService implements NoteService {
                 BeeNote beeNote = objectMapper.readValue(e.toString(), BeeNote.class);
 
                 MyNote myNote = new MyNote();
-
+                myNote.setUptimestampusec(String.valueOf(beeNote.getUpdatedAt()));
                 myNote.setIspinned(beeNote.isPinedTime()?1:0);
-
-                String s1 = IOUtils.toString(Files.newBufferedReader(map.get(beeNote.getObjectId())));
-                myNote.setTextcontent(s1);
-
+                Path path = map.get(beeNote.getObjectId());
+                if (Objects.nonNull(path)) {
+                    String s1 = IOUtils.toString(Files.newBufferedReader(path));
+                    myNote.setTextcontent(s1);
+                }else {
+                    System.out.println(beeNote.getObjectId());
+                }
                 myNote.setCreatedtimestampusec(String.valueOf(beeNote.getCreatedAt()));
 
                 beenotes.add(myNote);

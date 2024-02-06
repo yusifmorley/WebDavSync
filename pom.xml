@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
     <groupId>org.yusif</groupId>
-    <artifactId>WebDavSync</artifactId>
+    <artifactId>LocalServer</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -57,11 +57,14 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.30</version>
+                <scope>provided</scope>
+            </dependency>
+
 
 
         <dependency>

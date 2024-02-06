@@ -19,20 +19,10 @@ public class MyNote implements Serializable {
     private Integer ispinned;
     private String textcontent;
     private String createdtimestampusec;
-
+    private  String uptimestampusec;
     @Override
     public boolean equals(Object myNote) {
-        if (this.createdtimestampusec.equals(((MyNote) myNote).createdtimestampusec)){
-            return true;
-        }else return false;
+        return this.uptimestampusec.equals(((MyNote) myNote).uptimestampusec);
     }
 
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (ispinned != null ? ispinned.hashCode() : 0);
-        result = 31 * result + textcontent.hashCode();
-        result = 31 * result + (createdtimestampusec != null ? createdtimestampusec.hashCode() : 0);
-        return result;
-    }
 }

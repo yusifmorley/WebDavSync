@@ -23,7 +23,6 @@ file-observer:
     - res/memory
 
   taoPath: res/Tao/Tao-and-Teh-zh-cn.md
-
   gkPath: res/Google Keep
 
 table:
@@ -51,8 +50,8 @@ spring:
   datasource: #数据源配置
     username: root
     password: root
-    url: jdbc:mysql://localhost:3306/mydata?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/my_data?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver #mysql的驱动
 sync:   # 滞后文件 同步
   file: false
-  note: false
+  note: true

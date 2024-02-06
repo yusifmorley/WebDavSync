@@ -8,11 +8,12 @@ import com.yusif.service.WebDav.WebDavSubFunction.WebDavSubFunctionBaseEnvInit;
 import com.yusif.Tool.DicCheck;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@ConditionalOnProperty(value = "sync.file", havingValue = "true")
 @Component
 @Slf4j
 public class MyNoteBaseEnvCheck implements WebDavSubFunctionBaseEnvInit {

@@ -1,21 +1,20 @@
 package com.yusif.Tool;
 
 import com.yusif.config.FileOperationConfig;
-import com.yusif.service.WebDav.WebDavSubFunction.FileOperation.FileService.FileSort;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
+@ConditionalOnProperty(value = "sync.file", havingValue = "true")
 @Component
 @Slf4j
 public class DicCheck {
-    @Autowired
-    FileSort fileSort;
+
 
     @Autowired
     FileOperationConfig fileOperationConfig;
