@@ -15,10 +15,10 @@ import java.nio.file.Paths;
 @SpringBootApplication
 public class WebDavSyncApplication {
     public static void main(String[] args) throws IOException, InterruptedException {
-        Path path = Paths.get("res/windows-amd64-webdav/webdav.exe");
-
-        Runtime.getRuntime().exec("cmd /c  start " +
-                   path.toAbsolutePath().toString());
+//        Path path = Paths.get("res/windows-amd64-webdav/webdav.exe");
+//
+//        Runtime.getRuntime().exec("cmd /c  start " +
+//                   path.toAbsolutePath().toString());
 
         SpringApplication.run(WebDavSyncApplication.class, args);
 

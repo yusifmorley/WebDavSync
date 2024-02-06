@@ -5,6 +5,7 @@ import com.yusif.service.WebDav.WebDavSubFunction.MyNote.NoteService.MyNoteFunct
 import com.yusif.dao.MyNoteMapper;
 import com.yusif.Entity.note.MyNote;
 import com.yusif.service.WebDav.WebDavSubFunction.MyNote.NoteService.MyNoteFunctions.impl.GoogleNoteService;
+import com.yusif.service.mybackstageSevice.impl.LearnFixServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,15 @@ public class MyNoteSync {
     MyNoteInsert myNoteInsert;
     List<MyNote> pre;
     List<MyNote> aft;
+    LearnFixServiceImpl learnFixService;
     @Autowired
-    public MyNoteSync(MyNoteInsert myNoteInsert, MyNoteMapper myNoteMapper, BeeNoteService beeNoteService) throws IOException {
+    public MyNoteSync(MyNoteInsert myNoteInsert, MyNoteMapper myNoteMapper, LearnFixServiceImpl learnFixServiceImpl, BeeNoteService beeNoteService) throws IOException {
         this.beeNoteService=beeNoteService;
      //   this.googleNoteService=googleNoteService;
         this.myNoteMapper=myNoteMapper;
         this.myNoteInsert = myNoteInsert;
         pre=myNoteMapper.selectList(new QueryWrapper<>());
+        this.learnFixService=learnFixServiceImpl;
    }
 
    @PostConstruct
@@ -52,7 +55,7 @@ public class MyNoteSync {
        if (!myNotes.isEmpty()){
            for (MyNote my:myNotes
                 ) {
-               myNoteMapper.updateById(my);
+               learnFixService.saveOrUpdate(my);
            }
            log.info("数据库更新mynote成功！");
        }else {

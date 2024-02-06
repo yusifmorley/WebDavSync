@@ -14,10 +14,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @TableName("mynote")
 public class MyNote implements Serializable {
-   @TableId(value = "id",type = IdType.AUTO)
-    private Integer id;
     private Integer ispinned;
     private String textcontent;
+
+    @TableId(type = IdType.INPUT)
     private String createdtimestampusec;
     private  String uptimestampusec;
     @Override
